@@ -1,0 +1,5 @@
+opencv-python
+pillow
+scikit-image
+beepy
+opencv-contrib-python
