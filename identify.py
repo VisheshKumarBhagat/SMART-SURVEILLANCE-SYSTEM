@@ -161,29 +161,30 @@ def identify():
 			break
 
 def maincall():
+    if not os.path.exists("persons"):
+        os.makedirs("persons")
 
+    root = tk.Tk()
 
-	root = tk.Tk()
+    root.geometry("480x100")
+    root.title("identify")
 
-	root.geometry("480x100")
-	root.title("identify")
+    label = tk.Label(root, text="Select below buttons ")
+    label.grid(row=0, columnspan=2)
+    label_font = font.Font(size=35, weight='bold',family='Helvetica')
+    label['font'] = label_font
 
-	label = tk.Label(root, text="Select below buttons ")
-	label.grid(row=0, columnspan=2)
-	label_font = font.Font(size=35, weight='bold',family='Helvetica')
-	label['font'] = label_font
+    btn_font = font.Font(size=25)
 
-	btn_font = font.Font(size=25)
+    button1 = tk.Button(root, text="Add Member ", command=collect_data, height=2, width=20)
+    button1.grid(row=1, column=0, pady=(10,10), padx=(5,5))
+    button1['font'] = btn_font
 
-	button1 = tk.Button(root, text="Add Member ", command=collect_data, height=2, width=20)
-	button1.grid(row=1, column=0, pady=(10,10), padx=(5,5))
-	button1['font'] = btn_font
+    button2 = tk.Button(root, text="Start with known ", command=identify, height=2, width=20)
+    button2.grid(row=1, column=1,pady=(10,10), padx=(5,5))
+    button2['font'] = btn_font
+    root.mainloop()
 
-	button2 = tk.Button(root, text="Start with known ", command=identify, height=2, width=20)
-	button2.grid(row=1, column=1,pady=(10,10), padx=(5,5))
-	button2['font'] = btn_font
-	root.mainloop()
-
-	return
+    return
 
 

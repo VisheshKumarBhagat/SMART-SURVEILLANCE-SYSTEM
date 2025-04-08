@@ -2,9 +2,9 @@ stolen/*.jpg
 recordings/*.avi
 visitors/in/*.jpg
 visitors/out/*.jpg
-persons/*.jpg
+persons/*
 temp/*
-__pycache__/
+__pycache__/*
 
 model.yml
 
