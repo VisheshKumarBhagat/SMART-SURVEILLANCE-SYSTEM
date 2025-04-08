@@ -6,4 +6,6 @@ persons/*.jpg
 temp/*
 __pycache__/
 
+model.yml
+
 just_for_test.py
