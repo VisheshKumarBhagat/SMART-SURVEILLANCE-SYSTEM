@@ -1,5 +1,5 @@
 opencv-python
 pillow
 scikit-image
-beepy
+# beepy
 opencv-contrib-python

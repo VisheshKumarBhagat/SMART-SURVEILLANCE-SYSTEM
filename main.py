@@ -7,89 +7,106 @@ from record import record
 from PIL import Image, ImageTk
 from find_motion import find_motion
 from identify import maincall
+import time
+
+
+def show_splash():
+    splash = tk.Tk()
+    splash.title("Loading...")
+
+    
+    splash_width, splash_height = 500, 300
+    screen_width = splash.winfo_screenwidth()
+    screen_height = splash.winfo_screenheight()
+    x_coord = (screen_width - splash_width) // 2
+    y_coord = (screen_height - splash_height) // 2
+    splash.geometry(f"{splash_width}x{splash_height}+{x_coord}+{y_coord}")
+    splash.overrideredirect(True)
+
+    
+    splash_img = Image.open('icons/splash2.png').resize((500, 300), Image.Resampling.LANCZOS)
+    splash_photo = ImageTk.PhotoImage(splash_img)
+    splash_label = tk.Label(splash, image=splash_photo)
+    splash_label.pack()
+
+    
+    splash.after(3000, splash.destroy)
+    splash.mainloop()
+
+
+show_splash()
+
 
 window = tk.Tk()
-window.title("Smart cctv")
-window.iconphoto(False, tk.PhotoImage(file='mn.png'))
+window.title("Smart CCTV")
+window.iconphoto(False, tk.PhotoImage(file='icons/mn.png'))
 window.geometry('1080x700')
+window.configure(bg='#2c3e50')  # Dark background
 
 
-frame1 = tk.Frame(window)
-
-label_title = tk.Label(frame1, text="Smart cctv Camera")
-label_font = font.Font(size=35, weight='bold',family='Helvetica')
-label_title['font'] = label_font
-label_title.grid(pady=(10,10), column=2)
+title_font = font.Font(size=35, weight='bold', family='Helvetica')
+button_font = font.Font(size=20, weight='bold')
 
 
-icon = Image.open('icons/spy.png')
-icon = icon.resize((150,150), Image.Resampling.LANCZOS)
-icon = ImageTk.PhotoImage(icon)
-label_icon = tk.Label(frame1, image=icon)
-label_icon.grid(row=1, pady=(5,10), column=2)
+header_frame = tk.Frame(window, bg='#34495e')
+header_frame.pack(fill='x', pady=10)
 
-btn1_image = Image.open('icons/lamp.png')
-btn1_image = btn1_image.resize((50,50), Image.Resampling.LANCZOS)
-btn1_image = ImageTk.PhotoImage(btn1_image)
+label_title = tk.Label(header_frame, text="Smart CCTV Camera", font=title_font, fg='white', bg='#34495e')
+label_title.pack(pady=10)
 
-btn2_image = Image.open('icons/rectangle-of-cutted-line-geometrical-shape.png')
-btn2_image = btn2_image.resize((50,50), Image.Resampling.LANCZOS)
-btn2_image = ImageTk.PhotoImage(btn2_image)
-
-btn5_image = Image.open('icons/exit.png')
-btn5_image = btn5_image.resize((50,50), Image.Resampling.LANCZOS)
-btn5_image = ImageTk.PhotoImage(btn5_image)
-
-btn3_image = Image.open('icons/security-camera.png')
-btn3_image = btn3_image.resize((50,50), Image.Resampling.LANCZOS)
-btn3_image = ImageTk.PhotoImage(btn3_image)
-
-btn6_image = Image.open('icons/incognito.png')
-btn6_image = btn6_image.resize((50,50), Image.Resampling.LANCZOS)
-btn6_image = ImageTk.PhotoImage(btn6_image)
-
-btn4_image = Image.open('icons/recording.png')
-btn4_image = btn4_image.resize((50,50), Image.Resampling.LANCZOS)
-btn4_image = ImageTk.PhotoImage(btn4_image)
-
-btn7_image = Image.open('icons/recording.png')
-btn7_image = btn7_image.resize((50,50), Image.Resampling.LANCZOS)
-btn7_image = ImageTk.PhotoImage(btn7_image)
+icon = Image.open('icons/spy.png').resize((100, 100), Image.Resampling.LANCZOS)
+icon_img = ImageTk.PhotoImage(icon)
+label_icon = tk.Label(header_frame, image=icon_img, bg='#34495e')
+label_icon.pack()
 
 
-# --------------- Button -------------------#
-btn_font = font.Font(size=25)
-btn1 = tk.Button(frame1, text='Monitor', height=90, width=180, fg='green',command = find_motion, image=btn1_image, compound='left')
-btn1['font'] = btn_font
-btn1.grid(row=3, pady=(20,10))
-
-btn2 = tk.Button(frame1, text='Rectangle', height=90, width=180, fg='orange', command=rect_noise, compound='left', image=btn2_image)
-btn2['font'] = btn_font
-btn2.grid(row=3, pady=(20,10), column=3, padx=(20,5))
-
-btn_font = font.Font(size=25)
-btn3 = tk.Button(frame1, text='Noise', height=90, width=180, fg='green', command=noise, image=btn3_image, compound='left')
-btn3['font'] = btn_font
-btn3.grid(row=5, pady=(20,10))
-
-btn4 = tk.Button(frame1, text='Record', height=90, width=180, fg='orange', command=record, image=btn4_image, compound='left')
-btn4['font'] = btn_font
-btn4.grid(row=5, pady=(20,10), column=3)
+button_frame = tk.Frame(window, bg='#2c3e50')
+button_frame.pack(pady=20)
 
 
-btn6 = tk.Button(frame1, text='In Out', height=90, width=180, fg='green', command=in_out, image=btn6_image, compound='left')
-btn6['font'] = btn_font
-btn6.grid(row=5, pady=(20,10), column=2)
+def create_button(frame, text, image_path, command, row, col, fg_color):
+    btn_image = Image.open(image_path).resize((40, 40), Image.Resampling.LANCZOS)
+    btn_img = ImageTk.PhotoImage(btn_image)
+    button = tk.Button(
+        frame,
+        text=text,
+        command=command,
+        font=button_font,
+        image=btn_img,
+        compound='left',
+        height=90,
+        width=220,
+        fg=fg_color,
+        bg='#34495e',
+        activebackground='#3e4f5c',
+        bd=0
+    )
+    button.image = btn_img  
+    button.grid(row=row, column=col, padx=20, pady=15)
+    return button
 
-btn5 = tk.Button(frame1, height=90, width=180, fg='red', command=window.quit, image=btn5_image)
-btn5['font'] = btn_font
-btn5.grid(row=6, pady=(20,10), column=2)
 
-btn7 = tk.Button(frame1, text="identify", fg="orange",command=maincall, compound='left', image=btn7_image, height=90, width=180)
-btn7['font'] = btn_font
-btn7.grid(row=3, column=2, pady=(20,10))
+create_button(button_frame, 'Monitor', 'icons/lamp.png', find_motion, 0, 0, 'green')
+create_button(button_frame, 'Rectangle', 'icons/rectangle-of-cutted-line-geometrical-shape.png', rect_noise, 0, 1, 'orange')
+create_button(button_frame, 'Noise', 'icons/security-camera.png', noise, 1, 0, 'green')
+create_button(button_frame, 'Record', 'icons/recording.png', record, 1, 1, 'orange')
+create_button(button_frame, 'In Out', 'icons/incognito.png', in_out, 2, 0, 'green')
+create_button(button_frame, 'Identify', 'icons/recording.png', maincall, 2, 1, 'orange')
 
-frame1.pack()
+
+quit_btn = tk.Button(
+    window,
+    text='Exit',
+    command=window.quit,
+    font=button_font,
+    height=3,
+    width=20,
+    fg='white',
+    bg='#e74c3c',
+    activebackground='#c0392b',
+    bd=0
+)
+quit_btn.pack(pady=20)
+
+
 window.mainloop()
-
-

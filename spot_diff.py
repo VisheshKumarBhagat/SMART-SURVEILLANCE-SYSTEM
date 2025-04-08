@@ -2,7 +2,6 @@ import cv2
 import os
 from skimage.metrics import structural_similarity
 from datetime import datetime
-import beepy
 
 def spot_diff(frame1, frame2):
     g1 = cv2.cvtColor(frame1, cv2.COLOR_BGR2GRAY)
