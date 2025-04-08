@@ -12,8 +12,8 @@ def find_motion():
         print("Error: Camera not accessible")
         return
 
-    print("Waiting for 2 seconds...")
-    time.sleep(2)
+    # print("Waiting for 1 seconds...")
+    time.sleep(0)
 
     ret, frame1 = cap.read()
     if not ret:

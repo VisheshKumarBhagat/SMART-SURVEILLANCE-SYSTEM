@@ -138,5 +138,9 @@ This project is open-source and available under the [MIT License](LICENSE).
 
 Developed by:
 1. [Vishesh Kumar Bhagat](https://github.com/VisheshKumarBhagat).
-
+2. [Debojyoti Jha](http://github.com/jd3b)
+3. [Shaurya Anand](https://github.com/Shaurya-rgb89)
+4. [Shivam Agarwal](https://github.com/Kaljinx)
+5. [Sparsh Mishra](https://github.com/Sparsh08Mishra)
+6. [Sahasranshu Shastri](https://github.com/Sahasranshu-Shastri)
 ---
